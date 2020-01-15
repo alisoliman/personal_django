@@ -1,15 +1,12 @@
-from django.db import models
-
 # New imports added for ClusterTaggableManager, TaggedItemBase, MultiFieldPanel
 from django import forms
-
-from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from django.db import models
 from modelcluster.contrib.taggit import ClusterTaggableManager
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from taggit.models import TaggedItemBase
-
-from wagtail.core.models import Page, Orderable
-from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.core.fields import RichTextField
+from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
@@ -102,7 +99,6 @@ class BlogCategory(models.Model):
         'wagtailimages.Image', null=True, blank=True,
         on_delete=models.SET_NULL, related_name='+'
     )
-
     panels = [
         FieldPanel('name'),
         ImageChooserPanel('icon'),
