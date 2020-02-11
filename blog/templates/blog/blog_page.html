@@ -75,35 +75,22 @@
                                     <li>What happens next will shock you</li>
                                 </ul>
                             </div>
+                            <hr>
                             {% if page.tags.all.count %}
-                                <p>Tags</p>
+                                <h3 class="font-weight-bold">Tags</h3>
                                 <ul class="tag-cloud">
                                     {% for tag in page.tags.all %}
                                         <li>
-                                            <a class="btn" href="{% slugurl 'tags' %}?tag={{ tag }}">
+                                            <a class="btn btn--primary-2" href="{% slugurl 'tags' %}?tag={{ tag }}">
                                                 <span class="btn__text">{{ tag }}</span>
                                             </a>
                                         </li>
                                     {% endfor %}
                                 </ul>
                             {% endif %}
-                            <a class="btn btn--primary" href="{{ page.get_parent.url }}">
-                                <span class="btn__text">Return to blog</span>
+                            <a class="btn" href="{{ page.get_parent.url }}">
+                                <span class="btn-outline-dark">Return to blog</span>
                             </a>
-                            <div class="article__share text-center">
-                                <a class="btn bg--facebook btn--icon" href="#">
-                                            <span class="btn__text">
-                                                <i class="socicon socicon-facebook"></i>
-                                                Share on Facebook
-                                            </span>
-                                </a>
-                                <a class="btn bg--twitter btn--icon" href="#">
-                                            <span class="btn__text">
-                                                <i class="socicon socicon-twitter"></i>
-                                                Share on Twitter
-                                            </span>
-                                </a>
-                            </div>
                         </div>
                     </div>
                     <!--end of row-->

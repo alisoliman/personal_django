@@ -4,9 +4,21 @@ from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page
 
+from blog.models import BlogPage
+
 
 class HomePage(Page):
     body = RichTextField(blank=True)
+
+    def get_context(self, request):
+        # Filter by tag
+
+        blogpages = BlogPage.objects.live().order_by('-first_published_at')
+
+        # Update template context
+        context = super().get_context(request)
+        context['blogpages'] = blogpages
+        return context
 
     content_panels = Page.content_panels + [
         FieldPanel('body', classname="full"),

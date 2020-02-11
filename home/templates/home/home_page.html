@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags static %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block body_class %}theme--bordered{% endblock %}
 
@@ -42,120 +42,43 @@
                 </div>
                 <!--end of row-->
             </div>
-            <!--end of container-->
-        </section>
+        <!--end of container-->
+    </section>
     <section class="space--sm">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="masonry masonry-blog-magazine">
                         <div class="masonry__container row">
-                            <div class="masonry__item col-md-6"></div>
-                            <div class="masonry__item col-md-12 col-12 h" data-masonry-filter="Marketing">
-                                <a class="block" href="#">
-                                    <article class="imagebg border--round" data-scrim-bottom="8">
-                                        <span class="label">New</span>
-                                        <div class="background-image-holder">
-                                            <img alt="background" src="{% static 'img/blog-2.jpg' %}"/>
-                                        </div>
-                                        <div class="article__title">
-                                            <span>May 15th 2016</span>
-                                            <h4>A day in the life of a professional fitness blogger</h4>
-                                        </div>
-                                    </article>
-                                </a>
-                            </div>
+                            {% for post in blogpages %}
+                                {% with post=post.specific %}
+                                    <div class="masonry__item col-md-6 col-12" data-masonry-filter="Inspiration">
+                                        <a class="block" href="{% pageurl post %}">
+                                            <article class="imagebg border--round" data-scrim-bottom="8">
+                                                <div class="background-image-holder">
+                                                    {% with post.main_image as main_image %}
+                                                        {% if main_image %}
+                                                            {% image main_image max-1240x640 %}{% endif %}
+                                                    {% endwith %}
+                                                </div>
+                                                <div class="article__title">
+                                                    <span>{{ post.latest_revision_created_at }}</span>
+                                                    <h4>{{ post.title }}</h4>
+                                                </div>
+                                                <div class="article__author">
+                                                    {% if post.author %}
+                                                        <p>By {{ post.author.profile }}</p>
+                                                    {% endif %}
+                                                </div>
+                                            </article>
+                                        </a>
+                                    </div>
+                                {% endwith %}
+                            {% endfor %}
                             <!--end item-->
-                            <div class="masonry__item col-md-6 col-12" data-masonry-filter="Marketing">
-                                <a class="block" href="#">
-                                    <article class="imagebg border--round" data-scrim-bottom="8">
-                                        <div class="background-image-holder">
-                                            <img alt="background" src="{% static 'img/blog-3.jpg' %}"/>
-                                        </div>
-                                        <div class="article__title">
-                                            <span>May 12th 2016</span>
-                                            <h4>Small businesses that expertly leverage their online followings</h4>
-                                        </div>
-                                    </article>
-                                </a>
-                            </div>
-                            <!--end item-->
-                            <div class="masonry__item col-md-6 col-12" data-masonry-filter="Design">
-                                <a class="block" href="#">
-                                    <article class="imagebg border--round" data-scrim-bottom="8">
-                                        <div class="background-image-holder">
-                                            <img alt="background" src="{% static 'img/blog-4.jpg' %}"/>
-                                        </div>
-                                        <div class="article__title">
-                                            <span>May 9th 2016</span>
-                                            <h4>Designing efficiently in the age of distraction</h4>
-                                        </div>
-                                    </article>
-                                </a>
-                            </div>
-                            <!--end item-->
-                            <div class="masonry__item col-md-12 col-12" data-masonry-filter="Design">
-                                <a class="block" href="#">
-                                    <article class="imagebg border--round" data-scrim-bottom="8">
-                                        <div class="background-image-holder">
-                                            <img alt="background" src="{% static 'img/blog-1.jpg' %}"/>
-                                        </div>
-                                        <div class="article__title">
-                                            <span>May 3rd 2016</span>
-                                            <h4>Stack designer Marc Ruben's trips for working as a remote team
-                                                member</h4>
-                                        </div>
-                                    </article>
-                                </a>
-                            </div>
-                            <!--end item-->
-                            <div class="masonry__item col-md-6 col-12" data-masonry-filter="Marketing">
-                                <a class="block" href="#">
-                                    <article class="imagebg border--round" data-scrim-bottom="8">
-                                        <div class="background-image-holder">
-                                            <img alt="background" src="{% static 'img/blog-6.jpg' %}"/>
-                                        </div>
-                                        <div class="article__title">
-                                            <span>April 28 2016</span>
-                                            <h4>What will cutting down on email really do for your business</h4>
-                                        </div>
-                                    </article>
-                                </a>
-                            </div>
-                            <!--end item-->
-                            <div class="masonry__item col-md-6 col-12" data-masonry-filter="Inspiration">
-                                <a class="block" href="#">
-                                    <article class="imagebg border--round" data-scrim-bottom="8">
-                                        <span class="label">Hot</span>
-                                        <div class="background-image-holder">
-                                            <img alt="background" src="{% static 'img/blog-7.jpg' %}"/>
-                                        </div>
-                                        <div class="article__title">
-                                            <span>April 27 2016</span>
-                                            <h4>Our favourite things: Q1 2016 Edition</h4>
-                                        </div>
-                                    </article>
-                                </a>
-                            </div>
-                            <!--end item-->
+
                         </div>
                         <!--end masonry container-->
-                        <div class="pagination">
-                            <a class="pagination__prev" href="#" title="Previous Page">&laquo;</a>
-                            <ol>
-                                <li>
-                                    <a href="#">1</a>
-                                </li>
-                                <li>
-                                    <a href="#">2</a>
-                                </li>
-                                <li class="pagination__current">3</li>
-                                <li>
-                                    <a href="#">4</a>
-                                </li>
-                            </ol>
-                            <a class="pagination__next" href="#" title="Next Page">&raquo;</a>
-                        </div>
                     </div>
                     <!--end masonry-->
                 </div>

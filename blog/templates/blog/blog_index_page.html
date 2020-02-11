@@ -6,6 +6,21 @@
 
 
 {% block content %}
+    {#    {{ page.body|richtext }}#}
+
+    <section class="space--sm">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1><strong>{{ page.title }}</strong></h1>
+                    <p>{{ page.intro|richtext }}</p>
+                </div>
+            </div>
+        </div>
+        <!--end of row-->
+        <!--end of container-->
+    </section>
+
     <section class="space--sm">
         <div class="container">
             <div class="row">
